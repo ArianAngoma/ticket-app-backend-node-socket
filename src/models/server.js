@@ -3,7 +3,9 @@ const path = require('path');
 const express = require('express');
 const socketio = require('socket.io');
 const cors = require('cors');
-require('dotenv').config();
+
+/* Importaciones propias */
+const Sockets = require('./sockets');
 
 class Server {
     constructor() {
@@ -16,8 +18,15 @@ class Server {
         /* Configuración de sockets */
         this.io = socketio(this.server);
 
-        // Middlewares
+        /* Middlewares */
         this.middlewares();
+
+        /* Inicializar sockets */
+        this.configureSockets();
+    }
+
+    configureSockets() {
+        new Sockets(this.io);
     }
 
     middlewares() {
@@ -35,4 +44,4 @@ class Server {
     }
 }
 
-module.exports = new Server();
+module.exports = Server;
