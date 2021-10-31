@@ -10,7 +10,7 @@ class TicketList {
     }
 
     get nextNumber() {
-        return this.lastNumber++;
+        return this.lastNumber += 1;
     }
 
     /* Regresa los 3 ticketes de las tarjetas y 10 del historial */
