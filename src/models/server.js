@@ -22,11 +22,7 @@ class Server {
         this.middlewares();
 
         /* Inicializar sockets */
-        this.configureSockets();
-    }
-
-    configureSockets() {
-        new Sockets(this.io);
+        this.sockets = new Sockets(this.io);
     }
 
     middlewares() {
@@ -35,6 +31,14 @@ class Server {
 
         /* CORS */
         this.app.use(cors());
+
+        /* Get para los últimos tickets */
+        this.app.get('/ultimos', (req, res) => {
+            res.json({
+                ok: true,
+                last: this.sockets.ticketList.last13
+            });
+        });
     }
 
     execute() {
