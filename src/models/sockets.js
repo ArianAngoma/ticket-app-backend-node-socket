@@ -24,6 +24,11 @@ class Sockets {
                 /* El callback emite solo al cliente que lo llamó */
                 callback(newTicket);
             });
+
+            socket.on('next-ticket', ({agent, desk}, callback) => {
+                const yourTicket = this.ticketList.assignTicket(agent, desk);
+                callback(yourTicket);
+            });
         });
     }
 }

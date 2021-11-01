@@ -27,7 +27,7 @@ class TicketList {
     /* Asignar ticket a un agente y escritorio */
     assignTicket(agent, desk) {
         /* Validar si hay tickets en pendientes */
-        if (this.pending === 0) return null;
+        if (this.pending.length === 0) return null;
 
         /* Remover el primer ticket de pendientes */
         const nextTicket = this.pending.shift();
